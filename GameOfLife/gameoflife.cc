@@ -209,7 +209,8 @@ void filename_inc ( string* filename)
 }
 
 
-// Easy service function
+// Essentially useless function
+// But I wanted to print the world as '-' and 'o' for a more readable aspect
 int converti (char index)
 {
   int value;

@@ -6,7 +6,6 @@ SRC = 	mtranspose.cc	\
 		meanmedian.cc	\
 		norepetitions.cc\
 		noreptry.cc		\
-		/home/leonardo/DSSC/AdvancedProgramming/MyExercises/03/GameOfLife/gameoflife.cc
 		
 EXE = $(SRC:.cc=.x)
 

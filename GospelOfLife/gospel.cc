@@ -66,7 +66,7 @@ char * initialize (char * grid, int m, int n)
     }
   }
 
-  // Fill the grid (except edges)
+  // Fill the grid (manually) 
   grid[63]='O';
   grid[99]='O';
   grid[101]='O';
@@ -230,7 +230,8 @@ void filename_inc ( string* filename)
 }
 
 
-// Easy service function
+// Essentially useless function
+// But I wanted to print the world as '-' and 'o' for a more readable aspect
 int converti (char index)
 {
   int value;
