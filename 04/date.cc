@@ -17,13 +17,16 @@ enum class en_month
 
 class Date 
 {
-    public:
+        public:
+
+        //default constructor
+        inline Date() noexcept = default;
 
         //constructor
-        Date (int dd = {}, en_month mm = {}, int yy = {});
+        Date (int dd, en_month mm, int yy) : d{dd}, m{mm}, y{yy} {};
 
         //default destructor
-        ~Date();
+        ~Date(){};
 
         //functions returning the date
         int day() const {return d;}
@@ -33,12 +36,11 @@ class Date
         Date& add_day(int n);
         Date& add_month(int n);
         Date& add_year (int n);
-
-
+        
     private:
-        int d;
-        en_month m;
-        int y;
+        int d; //day
+        en_month m; //month
+        int y; //year
 };
 
 Date& Date::add_year (int n)
@@ -52,8 +54,17 @@ Date& Date::add_year (int n)
     return *this;
 }
 
+std::ostream& operator<<(std::ostream& os, const Date& printing)
+{
+    os << "Here: " << printing.day() << " / " << printing.month() << " / " << printing.year() << "\n";
+}
+
 
 int main()
 {
+    Date my_bith (13,static_cast<en_month>(1),1996);
+
+    std::cout << my_bith << std::endl;
+
     return 0;
 }
