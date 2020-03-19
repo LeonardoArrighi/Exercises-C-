@@ -17,7 +17,7 @@ enum class en_month
 
 class Date 
 {
-        public:
+    public:
 
         //constructor
         Date (int dd = {}, en_month mm = {}, int yy = {});
@@ -34,12 +34,6 @@ class Date
         Date& add_month(int n);
         Date& add_year (int n);
 
-
-
-        friend std::ostream& operator<<(std::ostream& os, const Date& n)
-        {
-            return os << "Here: " << d << " / " << m << " / " << y;
-        }
 
     private:
         int d;
@@ -61,9 +55,5 @@ Date& Date::add_year (int n)
 
 int main()
 {
-    Date my_bith = Date(14,3,2020);
-
-    std::cout << my_bith << std::endl;
-
     return 0;
 }

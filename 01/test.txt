@@ -1,6 +1,8 @@
 ciao
 ciao
+ciao
 cane
+
 gatto
 gatto
 gatto
