@@ -19,14 +19,11 @@ class Date
 {
         public:
 
-        //default constructor
-        inline Date() noexcept = default;
-
         //constructor
         Date (int dd, en_month mm, int yy) : d{dd}, m{mm}, y{yy} {};
 
         //default destructor
-        ~Date(){};
+        ~Date() = default;
 
         //functions returning the date
         int day() const {return d;}
@@ -56,7 +53,7 @@ Date& Date::add_year (int n)
 
 std::ostream& operator<<(std::ostream& os, const Date& printing)
 {
-    os << "Here: " << printing.day() << " / " << printing.month() << " / " << printing.year() << "\n";
+    return os << "Here: " << printing.day() << " / " << static_cast<char>(printing.month()) << " / " << printing.year() << "\n";
 }
 
 
