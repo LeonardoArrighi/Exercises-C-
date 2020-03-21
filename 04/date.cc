@@ -7,7 +7,8 @@ bool is_leap(const int y);
 struct no_negative_pls{};
 
 
-enum class en_month
+// enum class en_month (check for the best)
+enum en_month
 {
     jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec 
 };
@@ -41,7 +42,7 @@ class Date
 // add a number of day to the current date
 Date& Date::add_year (const int n)
 {
-    if(!(is_leap(y+n)) && (d==29 && m==static_cast<en_month>(2)))
+    if(!(is_leap(y+n)) && (d==29 && m==12)) // m == static_cast<en_month>(2)
     {
         d=1;
         m=static_cast<en_month>(3);
@@ -72,14 +73,15 @@ Date& Date::add_day(int n)
             {
                 d = d + j - 31;
 
-                if(m == static_cast<en_month>(12))
+                if(m == 12) // m == static_cast<en_month>(12)
                 {
                     y++;
                     m = static_cast<en_month>(1);
                 }
                 else
                 {
-                    m = static_cast<en_month>(static_cast<int>(m)+1);
+                    m = static_cast<en_month>(m+1);
+                //    m = static_cast<en_month>(static_cast<int>(m)+1);
                 }
             }
             else
@@ -97,7 +99,8 @@ Date& Date::add_day(int n)
             if((d + j) > 30)
             {
                 d = d + j - 30;
-                m = static_cast<en_month>(static_cast<int>(m)+1);
+                m = static_cast<en_month>(m+1);
+            //    m = static_cast<en_month>(static_cast<int>(m)+1);
             }
             else
             {
@@ -114,7 +117,8 @@ Date& Date::add_day(int n)
                 if ((d + j) > 29)
                 {
                     d = d + j - 29;
-                    m = static_cast<en_month>(static_cast<int>(m)+1);
+                    m = static_cast<en_month>(m+1);
+                //    m = static_cast<en_month>(static_cast<int>(m)+1);
                 }
                 else
                 {
@@ -129,7 +133,8 @@ Date& Date::add_day(int n)
                 if ((d + j) > 28)
                 {
                     d = d + j - 28;
-                    m = static_cast<en_month>(static_cast<int>(m)+1);
+                    m = static_cast<en_month>(m+1);
+                //    m = static_cast<en_month>(static_cast<int>(m)+1);
                 }
                 else
                 {
