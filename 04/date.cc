@@ -1,7 +1,7 @@
 #include <iostream>
 
 // functions
-bool is_leap(const int y);
+bool is_leap(const int y) noexcept;
 
 // error struct, useful for throwing exceptions
 struct no_negative_pls{};
@@ -16,7 +16,7 @@ enum en_month
 
 class Date 
 {
-        public:
+    public:
 
         //constructor
         Date (int dd, en_month mm, int yy) : d{dd}, m{mm}, y{yy} {};
@@ -25,9 +25,9 @@ class Date
         ~Date() = default;
 
         //functions returning the date
-        int day() const {return d;}
-        en_month month() const {return m;}
-        int year() const {return y;}
+        int day() const noexcept {return d;}
+        en_month month() const noexcept {return m;}
+        int year() const noexcept {return y;}
 
         Date& add_day(const int n);
         Date& add_year (const int n);
@@ -150,7 +150,7 @@ Date& Date::add_day(int n)
 
 // non- member function
 // check if the year is leap, returning true if it is
-bool is_leap(const int y)
+bool is_leap(const int y) noexcept
 {
     bool flag = false;
     if(y%4 == 0 && (y%100 != 0 || y%400 == 0))
