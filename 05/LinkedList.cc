@@ -49,14 +49,38 @@ class List
 
         //default destructor
         ~node(){};
-
     };
 
     //first node
     std::unique_ptr<node> head;
+
+    //size of the List
+    std::size_t size;
+
+
+    // append the newly created node at the end of the list
+    template <class OT>
+    void push_back(const OT& v);
+
+    // insert the newly created node in front of the list
+    template <class OT>
+    void push_front(const OT& v);
+    
+    //service function, returns a pointe to the last node
+    node* end();
+
+    public:
+
     
 
-//  public:
+//   // constructor(s) for List
+  
+//   // copy semantics
+//   // move semantics
+  
+//   // destructor
+
+
 //   // insert a new node with the value v according to the method m
 //   // this method should be used to fill the list
 //   void insert(const value_type& v, const Insertion_method m);
@@ -67,35 +91,9 @@ class List
 //   // delete all the nodes of the list
 //   void reset();
 
-//   // constructor(s) for List
-  
-//   // copy semantics
-//   // move semantics
-  
-//   // destructor
-
-//  private:
  
-//   // private struct node with the proper value_type
-//   struct node {
-//     value_type value;
-//     std::unique_ptr<node> next;
 
-//     // implement suitable constructor(s) for node
-    
-//     // copy and move semantics if needed
-    
-//     // destructor
-//   };
 
-//   // append the newly created node at the end of the list
-//   void push_back(const value_type& v);
-
-//   // insert the newly created node in front of the list
-//   void push_front(const value_type& v);
-
-//   std::unique_ptr<node> head;
-//   std::size_t size;
 };
 
 
@@ -113,28 +111,39 @@ class List
 //    - `void reset(T* ptr)` Delete `current_ptr` (if any) and set `current_ptr = ptr`.
 //    - To check if a `std::unique_ptr<T> p` is different from `nullptr` you can simply use `if(p)` (there is no need to write `if (p.get())`).
 
-// -  For a class `Foo`
+template <class T>
+template <class OT>
+void List<T>::push_back(const OT& v)
+{
+    node* last = end();
 
-//     ```C++
-//     class Foo{
-//       Foo(); // default ctor
-//       Foo(const Foo& f); // copy ctor
-//       Foo(Foo&& f); // move ctor
-      
-//       Foo& operator=(const Foo& f); // copy assignment
-//       Foo& operator=(Foo& f); // move assignment
-//     };
-//     ```
+    last->next = std::make_unique<node>(v, nullptr);
+}
 
-    
 
-// You are required to use blocks of memory (*heap*) locations which are linked together. Each of these blocks contains one component that may refer to another block. If each block (except the final one) contains a pointer to the next block, so that they form a chain, then the entire collection of linked blocks is called a **linked list**. The blocks of memory locations of a linked list are usually called *nodes*.
+template <class T>
+typename List<T>::node* List<T>::end()
+{   
+    auto tmp = head.get();
 
-// Every node of a linked list, except the final one, contains a pointer to its immediate *successor*, and every node except the first one is pointed to by its immediate *predecessor*. The pointer member of the last node has the value `nullptr`.
+    while(tmp->next) tmp = tmp->next.get();
 
-// The private member `head` points to the first element of the list. 
+    return tmp;
+}
 
-// ![linked_list.png](./.aux/list2.png)
+template <class T>
+template <class OT>
+void List<T>::push_front(const OT& v)
+{
+    head = std::make_unique<node>(v, head.release());
+}
+
+
+
+
+
+
+
 
 int main()
 {
