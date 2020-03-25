@@ -31,11 +31,15 @@ class List
         node(node* n, const T& v) : next{n}, value{v} {};
 
         //move ctor
-        node(node* n, const T&& v);
+        node(node* n, T&& v) : next{n}, value{std::move(v)} {};
 
-        //move assignment
+        //ctor which construct the unique_pointer of the next node 
+        node(const std::unique_ptr<node>& n) : value{n->value}
+        {
+            if(n->next) next = std::make_unique<node>(n->next);
+        }
 
-    }
+    };
 
 //  public:
 //   // insert a new node with the value v according to the method m
@@ -81,38 +85,43 @@ class List
 
 
 
-template <class T>
-std::ostream& operator<<(std::ostream& os, const List<T>& l);
+// template <class T>
+// std::ostream& operator<<(std::ostream& os, const List<T>& l);
 
-```
+// ```
 
-#### *Hints*:
+// #### *Hints*:
 
-- A `std::unique_ptr<T> p` has the following functions
-   - `T* get() const` Returns a pointer to the managed object or `nullptr` if no object is owned.
-   - `T* release()` Releases the ownership of the managed object if any. `get()` returns `nullptr` after the call.
-   - `void reset(T* ptr)` Delete `current_ptr` (if any) and set `current_ptr = ptr`.
-   - To check if a `std::unique_ptr<T> p` is different from `nullptr` you can simply use `if(p)` (there is no need to write `if (p.get())`).
+// - A `std::unique_ptr<T> p` has the following functions
+//    - `T* get() const` Returns a pointer to the managed object or `nullptr` if no object is owned.
+//    - `T* release()` Releases the ownership of the managed object if any. `get()` returns `nullptr` after the call.
+//    - `void reset(T* ptr)` Delete `current_ptr` (if any) and set `current_ptr = ptr`.
+//    - To check if a `std::unique_ptr<T> p` is different from `nullptr` you can simply use `if(p)` (there is no need to write `if (p.get())`).
 
--  For a class `Foo`
+// -  For a class `Foo`
 
-    ```C++
-    class Foo{
-      Foo(); // default ctor
-      Foo(const Foo& f); // copy ctor
-      Foo(Foo&& f); // move ctor
+//     ```C++
+//     class Foo{
+//       Foo(); // default ctor
+//       Foo(const Foo& f); // copy ctor
+//       Foo(Foo&& f); // move ctor
       
-      Foo& operator=(const Foo& f); // copy assignment
-      Foo& operator=(Foo& f); // move assignment
-    };
-    ```
+//       Foo& operator=(const Foo& f); // copy assignment
+//       Foo& operator=(Foo& f); // move assignment
+//     };
+//     ```
 
     
 
-You are required to use blocks of memory (*heap*) locations which are linked together. Each of these blocks contains one component that may refer to another block. If each block (except the final one) contains a pointer to the next block, so that they form a chain, then the entire collection of linked blocks is called a **linked list**. The blocks of memory locations of a linked list are usually called *nodes*.
+// You are required to use blocks of memory (*heap*) locations which are linked together. Each of these blocks contains one component that may refer to another block. If each block (except the final one) contains a pointer to the next block, so that they form a chain, then the entire collection of linked blocks is called a **linked list**. The blocks of memory locations of a linked list are usually called *nodes*.
 
-Every node of a linked list, except the final one, contains a pointer to its immediate *successor*, and every node except the first one is pointed to by its immediate *predecessor*. The pointer member of the last node has the value `nullptr`.
+// Every node of a linked list, except the final one, contains a pointer to its immediate *successor*, and every node except the first one is pointed to by its immediate *predecessor*. The pointer member of the last node has the value `nullptr`.
 
-The private member `head` points to the first element of the list. 
+// The private member `head` points to the first element of the list. 
 
-![linked_list.png](./.aux/list2.png)
+// ![linked_list.png](./.aux/list2.png)
+
+int main()
+{
+    return 0;
+}
