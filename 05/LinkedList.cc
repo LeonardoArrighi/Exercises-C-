@@ -19,6 +19,14 @@ enum class Insertion_method {push_back, push_front};
 template <class T>
 class List 
 {
+
+    public:
+
+
+
+
+    private:
+    
     struct node
     {
         // pointer to the next node
@@ -39,7 +47,14 @@ class List
             if(n->next) next = std::make_unique<node>(n->next);
         }
 
+        //default destructor
+        ~node(){};
+
     };
+
+    //first node
+    std::unique_ptr<node> head;
+    
 
 //  public:
 //   // insert a new node with the value v according to the method m
