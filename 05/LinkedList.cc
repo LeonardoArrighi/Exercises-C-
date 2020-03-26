@@ -9,7 +9,6 @@
 //  doppie e liste circolari.
 
 
-
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -19,8 +18,40 @@ enum class Insertion_method {push_back, push_front};
 template <class T>
 class List 
 {
-
     public:
+
+    //default ctor
+    List() = default;
+
+    //copy ctor
+    List(const List& l);
+
+    //move ctor
+    List(List&& l)=default;
+
+    //copy assignment
+    List& operator=(const List& l);
+
+    //move assignment
+    List& operator=(List&& l) = default;
+    
+    //default destructor
+    ~List() = default;
+  
+
+//   // insert a new node with the value v according to the method m
+//   // this method should be used to fill the list
+//   void insert(const value_type& v, const Insertion_method m);
+
+//   // return the size of the list
+//   std::size_t size() const;
+
+//   // delete all the nodes of the list
+//   void reset();
+
+ 
+
+
 
 
 
@@ -42,13 +73,13 @@ class List
         node(node* n, T&& v) : next{n}, value{std::move(v)} {};
 
         //ctor which construct the unique_pointer of the next node 
-        node(const std::unique_ptr<node>& n) : value{n->value}
+        explicit node(const std::unique_ptr<node>& n) : value{n->value}
         {
             if(n->next) next = std::make_unique<node>(n->next);
         }
 
         //default destructor
-        ~node(){};
+        ~node() = default;
     };
 
     //first node
@@ -68,48 +99,21 @@ class List
     
     //service function, returns a pointe to the last node
     node* end();
-
-    public:
-
-    
-
-//   // constructor(s) for List
-  
-//   // copy semantics
-//   // move semantics
-  
-//   // destructor
-
-
-//   // insert a new node with the value v according to the method m
-//   // this method should be used to fill the list
-//   void insert(const value_type& v, const Insertion_method m);
-
-//   // return the size of the list
-//   std::size_t size() const;
-
-//   // delete all the nodes of the list
-//   void reset();
-
- 
-
-
 };
 
+template <class T>
+List<T>::List(const List& l)
+{
+    head = std::make_unique<node>(l.head);
+}
+
+template <class T>
+List<T>& List<T>::operator=(const List& l)
+{
+    return *this;
+}
 
 
-// template <class T>
-// std::ostream& operator<<(std::ostream& os, const List<T>& l);
-
-// ```
-
-// #### *Hints*:
-
-// - A `std::unique_ptr<T> p` has the following functions
-//    - `T* get() const` Returns a pointer to the managed object or `nullptr` if no object is owned.
-//    - `T* release()` Releases the ownership of the managed object if any. `get()` returns `nullptr` after the call.
-//    - `void reset(T* ptr)` Delete `current_ptr` (if any) and set `current_ptr = ptr`.
-//    - To check if a `std::unique_ptr<T> p` is different from `nullptr` you can simply use `if(p)` (there is no need to write `if (p.get())`).
 
 template <class T>
 template <class OT>
