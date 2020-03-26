@@ -1,7 +1,7 @@
 #include <iostream>
 
 // functions
-bool is_leap(const int y) noexcept;
+bool is_leap(const int) noexcept;
 
 // error struct, useful for throwing exceptions
 struct no_negative_pls{};
