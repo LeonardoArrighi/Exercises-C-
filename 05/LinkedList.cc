@@ -92,7 +92,7 @@ class List
     void push_front(V&& v);
     
     //service function, returns a pointe to the last node
-    node* last();
+    node* last() noexcept;
 };
 
 template <class T>
@@ -132,7 +132,7 @@ void List<T>::push_back(V&& v)
 
 
 template <class T>
-typename List<T>::node* List<T>::last()
+typename List<T>::node* List<T>::last() noexcept
 {   
     auto tmp = head.get();
 
@@ -170,9 +170,6 @@ void List<T>::insert(V&& v, const method m)
         break;
     };
 }
-
-
-
 
 
 int main()
